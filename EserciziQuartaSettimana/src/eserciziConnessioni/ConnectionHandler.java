@@ -8,49 +8,31 @@ import java.sql.SQLException;
 public class ConnectionHandler {
 	private Connection con;
 	private String url;
-	
-	public ConnectionHandler(String typeDatabase,String address,String port,String databaseName ,String schema,String username,String password ) {
-		url = String.format("jdbc:%s://%s:%s/%s?currentSchema=%s&user=%s&password=%s",typeDatabase,address,port,databaseName,schema,username,password);
+
+	public ConnectionHandler(String typeDatabase, String address, String port, String databaseName, String schema,
+			String username, String password) throws ClassNotFoundException {
+		url = String.format("jdbc:%s://%s:%s/%s?currentSchema=%s&user=%s&password=%s", typeDatabase, address, port,
+				databaseName, schema, username, password);
+		Class.forName("org.postgresql.Driver");
 	}
-	
-	public Connection getConnection(){
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Driver postgreSQL non trovati");
-		}
-		try {
-			if (con==null||con.isClosed()) {
-			this.con = DriverManager.getConnection(this.url);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Url non corretto, Connessione non stabilita");
+
+	public Connection getConnection() throws SQLException {
+		if (con == null || con.isClosed()) {
+			this.con = DriverManager.getConnection(url);
 		}
 		return this.con;
 	}
-	
-	public void closeConnection(){
-		try {
+
+	public void closeConnection() throws SQLException {
+		if (con != null)
 			this.con.close();
-			//this.con = null;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Non è stato possibile chiudere la risorsa.");
-		} catch(NullPointerException e) {
-			System.out.println("La risorsa non è aperta");
-		}
+		// this.con = null;
 	}
-	
-	public PreparedStatement getPreparedStatement(String queryTemplate ){
-		PreparedStatement prep = null;
-		try {if (con!=null)
-			prep = con.prepareStatement(queryTemplate);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Connessione chiusa, PreparedStatement non creato");
-		}
+
+	public PreparedStatement getPreparedStatement(String queryTemplate) throws SQLException {
+		con = getConnection();
+		PreparedStatement prep = con.prepareStatement(queryTemplate);
 		return prep;
 	}
-	
+
 }
