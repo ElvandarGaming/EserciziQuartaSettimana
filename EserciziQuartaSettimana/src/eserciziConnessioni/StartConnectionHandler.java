@@ -12,7 +12,7 @@ public class StartConnectionHandler {
 
 		ConnectionHandler x = null;
 		x = new ConnectionHandler("postgresql", "localhost", "5432", "EsercizioGiorno2", "tirocinio", "postgres",
-				"sex");
+				"sax");
 		// ConnectionHandler x = new
 		// ConnectionHandler("jdbc:postgresql://localhost:5432/EsercizioGiorno2",
 		// "tirocinio", "postgres", "sex");
