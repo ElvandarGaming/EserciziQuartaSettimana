@@ -11,13 +11,8 @@ public class StartConnectionHandler {
 	public static void main(String[] args) {
 
 		ConnectionHandler x = null;
-		try {
-			x = new ConnectionHandler("postgresql", "localhost", "5432", "EsercizioGiorno2", "tirocinio", "postgres",
-					"sex");
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-			System.exit(0);
-		}
+		x = new ConnectionHandler("postgresql", "localhost", "5432", "EsercizioGiorno2", "tirocinio", "postgres",
+				"sex");
 		// ConnectionHandler x = new
 		// ConnectionHandler("jdbc:postgresql://localhost:5432/EsercizioGiorno2",
 		// "tirocinio", "postgres", "sex");
@@ -43,7 +38,7 @@ public class StartConnectionHandler {
 		} catch (SQLException d) {
 			System.exit(0);
 		}
-
+		
 		// jdbc:postgresql://localhost:5432/EsercizioGiorno2?currentSchema=tirocinio&user=postgres&password=sex
 
 	}
