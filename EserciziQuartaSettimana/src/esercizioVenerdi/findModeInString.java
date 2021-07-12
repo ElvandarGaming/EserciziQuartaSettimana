@@ -18,6 +18,7 @@ public class findModeInString {
 	
 	public static String findMode(String frase) {
 		Map<String,ContaStringa> ripetiz = new HashMap<>();
+		
 		String[] parole = frase.split(" ");
 		
 		for(int i = 0;i<parole.length;i++) {
@@ -44,7 +45,7 @@ public class findModeInString {
 		return  mode;
 	}
 	
-	public static List<String> findModes(String frase) {
+	public static List<String> findModes(String frase) { //non finito
 		Map<String,ContaStringa> ripetiz = new HashMap<>();
 		String[] parole = frase.split(" ");
 		
